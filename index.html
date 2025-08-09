@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Website</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+    <!-- header navbar section start  -->
+
+    <header>
+
+        <!-- logo name  -->
+        <a href="#" class="logo"><span>D</span>octors <span>C</span>ares.</a>
+
+         <!-- navbar link  -->
+        <nav class="navbar">
+            <ul>
+                <li><a href="#home">home</a></li>
+                <li><a href="#about">about</a></li>
+                <li><a href="#doctor">doctor</a></li>
+                 <li><a href="#blog">blog</a></li>
+                <li><a href="#contact">contact</a></li>
+                <li><a href="#appointment"> Appointment</a></li>
+                
+            </ul>
+        </nav>
+        
+        <div class="fas fa-bars"></div>
+    </header>
+    <!-- header navbar section end  -->
+     
+    <!-- home section start  -->
+
+    <section id="home" class="home">
+
+        <div class="row">
+
+            <!-- home images  -->
+            <div class="images">
+                <img src="home1.jpg" alt="">
+            </div>
+
+            <!-- home heading  -->
+            <div class="content">
+                <h1><span> Your Health. Our Mission.</span></h1>
+                <p>  are committed to providing quality care with compassion, safety, and excellence.</p>
+                <button class="button">Get a Appointment</button></a>
+            </div>
+        </div>
+    </section>
+    <!-- home section end  -->
+     
+    <!-- about section start  -->
+
+    <section id="about" class="about">
+
+        <h1 class="heading">about our facility</h1>
+        <h3 class="title">learn and explore our facility</h3>
+
+        <div class="box-container">
+
+            <!-- start here  -->
+            <div class="box">
+                <!-- about images  -->
+                <div class="images">
+                    <img src="about1.jpg" alt="">
+                </div>
+                
+                <!-- about heading & text  -->
+                <div class="content">
+                    <h3>ambulance services</h3>
+                    <p>At [Hospital Name], our emergency ambulance services are available 24 hours a day, 7 days a week, ensuring immediate medical response when you need it the most.</p>
+                 <a href="#"><button class="button">learn more</button></a>   
+                </div>
+            </div>
+            <!-- end here  -->
+
+            <!-- card section start  -->
+
+
+            
+            <!-- start here  -->
+            <div class="box">
+                <!-- about images  -->
+                <div class="images">
+                    <img src="about2.jpg" alt="">
+                </div>
+                
+                <!-- about heading & text  -->
+                <div class="content">
+                    <h3>emergency rooms</h3>
+                    <p>Our Emergency Room is open 24 hours a day, 7 days a week, providing immediate medical attention for serious illnesses and injuries. Whether it’s day or night, our experienced emergency care team is here to help when you need us most.</p>
+                 <a href="#"><button class="button">learn more</button></a>   
+                </div>
+            </div>
+            <!-- end here  -->
+
+            
+            <!-- start here  -->
+            <div class="box">
+                <!-- about images  -->
+                <div class="images">
+                    <img src="about3.jpg" alt="">
+                </div>
+                
+                <!-- about heading & text  -->
+                <div class="content">
+                    <h3>free check-ups</h3>
+                    <p>At [Hospital Name], we believe that preventive care saves lives. That’s why we offer free health check-ups throughout the year to help you stay on top of your health—before problems start.
+                    </p>
+                 <a href="#"><button class="button">learn more</button></a>   
+                </div>
+            </div>
+            <!-- end here  -->
+           </div>
+    </section>
+
+    
+    <!-- about section end  -->
+    
+     <!-- card section start  -->
+
+    <!-- doctor section start -->
+<section id="doctor" class="card">
+
+    <h1 class="heading">doctors</h1>
+    <h3 class="title">our professional doctors</h3>
+  
+    <div class="filter" style="text-align: center; margin-bottom: 30px;">
+      <label for="specializationFilter">Filter by Specialization:</label>
+      <select id="specializationFilter">
+        <option value="all">All</option>
+        <option value="Cardiologist">Cardiologist</option>
+        <option value="Dermatologist">Dermatologist</option>
+        <option value="Pediatrician">Pediatrician</option>
+        <option value="Neurologist">Neurologist</option>
+      </select>
+    </div>
+  
+    <div class="box-container" id="doctorList">
+      <!-- Doctor cards will be rendered dynamically here -->
+    </div>
+  
+  </section>
+  <!-- doctor section end -->
+  
+  <!-- Place this script before the closing </body> tag -->
+  <script>
+    const doctors = [
+      { name: "Dr. Alice Smith", specialization: "Cardiologist", image: "doctor-1.jpg" },
+      { name: "Dr. John Doe", specialization: "Dermatologist", image: "doctor-2.jpg" },
+      { name: "Dr. Maria Garcia", specialization: "Pediatrician", image: "doctor-3.jpg" },
+      { name: "Dr. Ahmed Khan", specialization: "Neurologist", image: "doctor-4.jpg" },
+      { name: "Dr. Lisa Wong", specialization: "Cardiologist", image: "doctor-5.jpg" }
+    ];
+  
+    const doctorList = document.getElementById("doctorList");
+    const filter = document.getElementById("specializationFilter");
+  
+    function renderDoctors(specialization = "all") {
+      doctorList.innerHTML = "";
+  
+      const filteredDoctors = specialization === "all"
+        ? doctors
+        : doctors.filter(doc => doc.specialization === specialization);
+  
+      if (filteredDoctors.length === 0) {
+        doctorList.innerHTML = '<p style="text-align:center;">No doctors found for this specialization.</p>';
+        return;
+      }
+  
+      filteredDoctors.forEach(doc => {
+        const box = document.createElement("div");
+        box.className = "box";
+        box.innerHTML = `
+          <img src="${doc.image}" alt="${doc.name}">
+          <div class="content">
+            <h2>${doc.name}</h2>
+            <p>${doc.specialization}</p>
+            <div class="icons">
+              <a href="#" class="fab fa-facebook-f"></a>
+              <a href="#" class="fab fa-twitter"></a>
+              <a href="#" class="fab fa-instagram"></a>
+            </div>
+          </div>
+        `;
+        doctorList.appendChild(box);
+      });
+    }
+  
+    filter.addEventListener("change", () => {
+      renderDoctors(filter.value);
+    });
+  
+    document.addEventListener("DOMContentLoaded", () => {
+      renderDoctors();
+    });
+  </script>
+   
+   
+  
+
+
+                <!-- end here  -->
+
+            </div>
+        </div>
+    </section>
+    <!-- card section end  -->
+            </div>
+        </div>
+    </section>
+    <!-- card section end  -->
+
+    <!-- review section start  -->
+
+    <section id="review" class="review">
+
+        <h1 class="heading">our patient review</h1>
+        <h3 class="title">what patient says about us</h3>
+
+        <div class="box-container">
+
+            <!-- start here  -->
+            <div class="box">
+                <i class="fas fa-quote-left"></i>
+                <p>"The doctors here are very caring and take time to explain everything clearly. I felt comfortable and well looked after during my treatment."</p>
+
+                <div class="images">
+                    <img src="img-1.jpg" alt="">
+
+                    <div class="info">
+                        <h3>john doe</h3>
+                        <span>date : 11 2024</span>
+                    </div>
+                </div>
+            </div>
+            <!-- end here  -->
+
+            
+            <!-- start here  -->
+            <div class="box">
+                <i class="fas fa-quote-left"></i>
+                <p>"Excellent service! The staff is friendly and professional. Booking an appointment was quick and hassle-free."</p>
+
+                <div class="images">
+                    <img src="img-2.jpg" alt="">
+
+                    <div class="info">
+                        <h3>john doe</h3>
+                        <span>date : 11 2024</span>
+                    </div>
+                </div>
+            </div>
+            <!-- end here  -->
+
+            
+            <!-- start here  -->
+            <div class="box">
+                <i class="fas fa-quote-left"></i>
+                <p>I had a great experience. The clinic is clean, the team is attentive, and I received the right treatment without any delay."</p>
+
+                <div class="images">
+                    <img src="img-3.jpg" alt="">
+
+                    <div class="info">
+                        <h3>john doe</h3>
+                        <span>date : 11 2024</span>
+                    </div>
+                </div>
+            </div>
+            <!-- end here  -->
+        </div>
+    </section>
+    <!-- review section end  -->
+ 
+   <!-- contact section start  -->
+<section id="contact" class="contact">
+    <h1 class="heading">contact us</h1>
+    <h3 class="title">you can talk to us any time</h3>
+
+    <div class="row">
+        <!-- form image  -->
+        <div class="images">
+            <img src="hosp.jpg" alt="">
+        </div>
+
+        <!-- contact form -->
+        <div class="form-container">
+            <form id="contactForm">
+                <input type="text" id="fullName" placeholder="Full Name" required>
+                <small class="error" id="nameError"></small>
+
+                <input type="email" id="email" placeholder="Enter your email" required>
+                <small class="error" id="emailError"></small>
+
+                <input type="text" id="phone" placeholder="Phone" required>
+                <small class="error" id="phoneError"></small>
+
+                <textarea id="message" placeholder="Your Message" cols="30" rows="5" required></textarea>
+                <small class="error" id="messageError"></small>
+
+                <input type="submit" value="Send">
+            </form>
+
+            <!-- Success Message -->
+            <p id="successMessage" style="color: green; font-weight: bold; display: none; margin-top: 10px;">
+                ✅ Thanks for contacting us! We will get back to you soon.
+            </p>
+        </div>
+    </div>
+</section>
+<!-- contact section end  -->
+
+<style>
+    .error {
+        color: red;
+        font-size: 10.2rem;
+        display: block;
+        margin-bottom: 5px;
+    }
+</style>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    let valid = true;
+
+    // Get form values
+    const name = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    // Error elements
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+    const phoneError = document.getElementById('phoneError');
+    const messageError = document.getElementById('messageError');
+    const successMessage = document.getElementById('successMessage');
+
+    // Reset errors
+    nameError.textContent = "";
+    emailError.textContent = "";
+    phoneError.textContent = "";
+    messageError.textContent = "";
+    successMessage.style.display = "none";
+
+    // Name validation
+    if (!/^[A-Za-z\s]{3,}$/.test(name)) {
+        nameError.textContent = "Name must be at least 3 letters and contain only alphabets.";
+        valid = false;
+    }
+
+    // Email validation
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        emailError.textContent = "Please enter a valid email address.";
+        valid = false;
+    }
+
+    // Phone validation
+    if (!/^\d{10}$/.test(phone)) {
+        phoneError.textContent = "Phone must be 10 digits.";
+        valid = false;
+    }
+
+    // Message validation
+    if (message.length < 10) {
+        messageError.textContent = "Message must be at least 10 characters long.";
+        valid = false;
+    }
+
+    if (valid) {
+        successMessage.style.display = "block"; // Show success message
+        this.reset(); // Clear the form
+    }
+});
+</script>
+
+
+ <!-- blog section start  -->
+
+    <section id="blog" class="blog">
+
+        <h1 class="heading">blog</h1>
+        <h3 class="title"> we're here to help you live a healthier life.</h3>
+
+        <div class="box-container">
+
+            <!-- start here  -->
+            <div class="box">
+                <!-- images  -->
+                <img src="blog-1.jpg" alt="">
+
+                <div class="content">
+                    <a href="#">
+                        <h2>diabetes</h2>
+                    </a>
+                    <p>Diabetes is a chronic condition that affects how your body processes blood sugar (glucose). </p>
+                     <!-- button  -->
+                    <a href="#"> <button class="button">learn more</button></a>
+                </div>
+            </div>
+            <!-- end here  -->
+
+            
+            <!-- start here  -->
+            <div class="box">
+                <!-- images  -->
+                <img src="blog-2.jpg" alt="">
+
+                <div class="content">
+                    <a href="#">
+                        <h2>Cancer disease</h2>
+                    </a>
+                    <p>Cancer is a group of diseases characterized by the uncontrolled growth and spread of abnormal cells in the body.</p>
+                     <!-- button  -->
+                    <a href="#"> <button class="button">learn more</button></a>
+                </div>
+            </div>
+            <!-- end here  -->
+
+            
+            <!-- start here  -->
+            <div class="box">
+                <!-- images  -->
+                <img src="blog-3.jpg" alt="">
+
+                <div class="content">
+                    <a href="#">
+                        <h2>prevent epidemic</h2>
+                    </a>
+                    <p>Stay protected by keeping up with vaccinations, practicing good hygiene, and reporting unusual illnesses.</p>
+                     <!-- button  -->
+                    <a href="#"> <button class="button">learn more</button></a>
+                </div>
+            </div>
+
+             <div class="box">
+                <!-- images  -->
+                <img src="blog-4.jpg" alt="">
+
+                <div class="content">
+                    <a href="#">
+                        <h2>Hypertension (High Blood Pressure)</h2>
+                    </a>
+                    <p> Symptoms -Headaches,Shortness of breath,Nosebleeds </p>
+                     <!-- button  -->
+                    <a href="#"> <button class="button">learn more</button></a>
+                </div>
+            </div>
+              <!-- end here  -->
+
+            
+            <!-- start here  -->
+            <div class="box">
+                <!-- images  -->
+                <img src="blog-5.jpg" alt="">
+
+                <div class="content">
+                    <a href="#">
+                        <h2>Influenza</h2>
+                    </a>
+                    <p>Influenza – caused by the influenza virus</p>
+                     <!-- button  -->
+                    <a href="#"> <button class="button">learn more</button></a>
+                </div>
+            </div>
+            <!-- end here  -->
+
+            <!-- start here  -->
+            <div class="box">
+                <!-- images  -->
+                <img src="blog-6.jpg" alt="">
+
+                <div class="content">
+                    <a href="#">
+                        <h2>panic attack</h2>
+                    </a>
+                    <p>a pounding or racing heartbeat</p>
+                     <!-- button  -->
+                    <a href="#"> <button class="button">learn more</button></a>
+                </div>
+            </div>
+            <!-- end here  -->
+        </div>
+    </section>
+
+    
+
+
+
+
+    <!-- blog section end  -->
+
+
+    <!-- Button to open the modal -->
+
+<h1 class="heading">book an appointment</h1>
+<button id="openModalBtn">book an appointment</button>
+
+
+<!-- The Modal -->
+<div id="appointmentModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeModalBtn">&times;</span>
+    <h2>Book Appointment</h2>
+    <form id="appointmentForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="1234567890" required />
+
+      <label for="date">Appointment Date</label>
+      <input type="date" id="date" name="date" required />
+
+      <label for="time">Appointment Time</label>
+      <input type="time" id="time" name="time" required />
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+
+
+    <!-- footer section start  -->
+
+    <section class="footer">
+
+        <div class="box">
+            <h2 class="logo"><span>D</span>octors <span>C</span>ares</h2>
+
+            <p>Behind every diagnosis is a story. We listen, we care, we heal.”</p>
+        </div>
+
+        <div class="box">
+            <h2 class="logo"><span>D</span>epartment</h2>
+
+            <a href="#">Cardiologist</a>
+            <a href="#">Dermatologist</a>
+            <a href="#">Pediatrician</a>
+            <a href="#">Neurologist</a>
+            <a href="#">Cardiologist</a>
+        </div>
+
+        <div class="box">
+            <h2 class="logo"><span>L</span>inks</h2>
+
+            <a href="#">home</a>
+            <a href="#">about</a>
+            <a href="#">Doctor</a>
+            <a href="#">Review</a>
+            <a href="#">contact</a>
+            <a href="#">blog</a>
+        </div>
+
+        <div class="box">
+            <h2 class="logo"><span>S</span>ervice</h2>
+
+            <a href="#">ambulance services</a>
+            <a href="#">emergency rooms</a>
+            <a href="#">free check-ups</a>
+            
+        </div>
+
+
+
+        <h1 class="credit">created by <span>CheakIn care</span> all right reserved.</h1>
+    </section>
+
+
+
+
+
+
+
+
+    <!-- footer section end  -->
+    
+
+<script>
+  const modal = document.getElementById('appointmentModal');
+  const openBtn = document.getElementById('openModalBtn');
+  const closeBtn = document.getElementById('closeModalBtn');
+  const form = document.getElementById('appointmentForm');
+
+  // Open modal
+  openBtn.addEventListener('click', () => {
+    modal.style.display = 'block';
+  });
+
+  // Close modal on clicking close button
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  // Close modal if user clicks outside modal content
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+
+  // Handle form submit
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // You can add code here to send form data to server or display success message
+    alert('Appointment booked successfully!');
+
+    // Reset form and close modal
+    form.reset();
+    modal.style.display = 'none';
+  });
+</script>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+    <!-- jquery cdn link  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- custom js file link  -->
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
